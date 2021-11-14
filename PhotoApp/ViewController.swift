@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
@@ -14,6 +15,18 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func loginAction(_ sender: Any) {
+        
+        // Firebase Login
+        Auth.auth().signInAnonymously{(authResult,error) in
+            let user = authResult?.user
+            print(user)
+            
+            // transition view controller
+            let inputVC = self.storyboard?.instantiateViewController(withIdentifier: "inputViewController") as! InputViewController
+            self.navigationController?.pushViewController(inputVC, animated: true)
+        }
+    }
+    
 }
 
